@@ -10,6 +10,8 @@ read -p "[Yy/*] open sublime? " sublime
 
 read -p "[Yy/*] open chrome? " chrome
 
+read -p "[Yy/*] open Burp? " burp
+
 read -p "open ide? [Aa]ndroid [Pp]ycharm. " ide
 
 #read -p "open VM? [Kk]ali [Dd]ebian [Ww]indows. " vbox
@@ -25,7 +27,6 @@ tmux split-window -h
 tmux select-pane -t 0
 tmux split-window -h
 
-# Setup
 ############################## pane 1
 tmux select-pane -t 1
 
@@ -40,9 +41,19 @@ esac
 tmux send-keys "htop" C-m;
 
 ############################# pane 0
+tmux select-pane -t 0 ;
+
 case $ide in
-    [Aa] ) tmux select-pane -t 0 ;tmux send-keys "~/Downloads/android-studio/bin/studio.sh" C-m ;;
-    [Pp] ) tmux select-pane -t 0 ;tmux send-keys "~/pycharm-community-2017.3.1/bin/pycharm.sh" C-m ;;
+    [Aa] ) tmux send-keys "~/Downloads/android-studio/bin/studio.sh" C-m ;;
+    [Pp] ) tmux send-keys "~/pycharm-community-2017.3.1/bin/pycharm.sh" C-m ;;
 esac
+
+############################## pane 2
+tmux select-pane -t 2
+
+case $burp in
+    [Yy] ) tmux send-keys "java -jar ~/tools/burp/burpsuite_community_*" C-m;
+esac
+
 
 tmux a -t hello
